@@ -40,6 +40,6 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build --public-url /GameSolver/",
-    "eslint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx"
+    "test": "eslint ./src --ext .ts,.tsx"
   }
 }
