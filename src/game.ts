@@ -29,10 +29,10 @@ export interface PlayerInfo {
 }
 
 export abstract class Game {
-    abstract load(data: string): void
-    abstract solve(cb: (graph: SerializedGraph) => void, interval: number): string[]
-    abstract render(state: string, width: number, height: number): ImageBitmap
-    abstract renderFallback(state: string, canvas: HTMLCanvasElement): void
+    public abstract load(data: string): void
+    public abstract solve(cb: (graph: SerializedGraph) => void, interval: number): string[]
+    public abstract render(state: string, width: number, height: number): ImageBitmap
+    public abstract renderFallback(state: string, canvas: HTMLCanvasElement): void
 }
 
 interface NodeAttributes {
@@ -55,7 +55,7 @@ export type RenderingContext = CanvasRenderingContext2D | OffscreenCanvasRenderi
 export abstract class TypedGame<Setup, State> extends Game {
     private setup?: Setup
 
-    load(data: string): void {
+    public load(data: string): void {
         try {
             const setup: unknown = JSON.parse(data)
             if (!ajv.validate(this.schema, setup)) {
@@ -122,7 +122,7 @@ export abstract class TypedGame<Setup, State> extends Game {
         return false
     }
 
-    solve(cb: (graph: SerializedGraph) => void, interval: number): string[] {
+    public solve(cb: (graph: SerializedGraph) => void, interval: number): string[] {
         let nextTime = new Date().valueOf() + interval
         const graph = new MultiDirectedGraph<NodeAttributes, EdgeAttributes>()
         const players = this.getPlayers()
@@ -189,14 +189,14 @@ export abstract class TypedGame<Setup, State> extends Game {
         return ctx
     }
 
-    render(state: string, width: number, height: number): ImageBitmap {
+    public render(state: string, width: number, height: number): ImageBitmap {
         const canvas = new OffscreenCanvas(width, height)
         this.renderState(this.decodeState(state), width, height, this.getRenderingContext(canvas))
         const bitmap = canvas.transferToImageBitmap()
         return Comlink.transfer(bitmap, [bitmap])
     }
 
-    renderFallback(state: string, canvas: HTMLCanvasElement): void {
+    public renderFallback(state: string, canvas: HTMLCanvasElement): void {
         this.renderState(this.decodeState(state), canvas.width, canvas.height, this.getRenderingContext(canvas))
     }
 

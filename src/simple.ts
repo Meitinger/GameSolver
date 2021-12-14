@@ -92,7 +92,7 @@ export const Schema: JSONSchemaType<Setup> = {
 export class Simple extends TypedGame<Setup, State> {
     protected readonly schema = Schema
 
-    getPlayers(): PlayerInfo[] {
+    public getPlayers(): PlayerInfo[] {
         return Object.entries(this.getSetup().players).map(([name, player]) => ({ name, color: player.color }))
     }
 

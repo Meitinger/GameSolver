@@ -65,7 +65,7 @@ export const Schema: JSONSchemaType<Setup> = {
 export class TicTacToe extends TypedGame<Setup, State> {
     protected readonly schema = Schema
 
-    getPlayers(): PlayerInfo[] {
+    public getPlayers(): PlayerInfo[] {
         return [
             {
                 name: 'x',
