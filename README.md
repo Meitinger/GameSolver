@@ -22,14 +22,14 @@ implementing `encodeState` and `decodeState` respectively.
 In order to verify the setup, a game must provide a JSON `schema`, which is an
 object of type `JSONSchemaType` from the [ajv](https://ajv.js.org/) validator.
 You can use `getSetup` in all functions to safely retrieve the loaded setup.
-A sample setup, together with other game meta data, has to registered in the
-`Games` object defined in `src/setup.ts`.
+A sample setup, together with other game meta data, has to be registered with
+the `Games` object defined in `src/setup.ts`.
 
 The game has to provide the name and color of players through `getPlayers`, as
 well as the initial state (`getInitialState`), transitions between states
 (`getNextStates`) and if a player is winning in a certain state
 (`getWinningPlayersFromState`).
-In contrast to tradition decision games, getting stuck does not automatically
+In contrast to traditional decision games, getting stuck doesn't automatically
 count as a win for other players, so the game needs to return these wins
 explicitly if so desired.
 
