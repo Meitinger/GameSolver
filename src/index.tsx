@@ -30,21 +30,21 @@ import './patch.css'
 uikit.use(Icons)
 
 self.MonacoEnvironment = {
-    getWorkerUrl: () => new URL('./../node_modules/monaco-editor/esm/vs/language/json/json.worker.js', import.meta.url)
+  getWorkerUrl: () => new URL('./../node_modules/monaco-editor/esm/vs/language/json/json.worker.js', import.meta.url)
 }
 
 monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-    validate: true,
-    schemas: Object.entries(Games).map(([id, data]) => ({
-        uri: `https://meitinger.github.io/GameSolver/schemas/${id}.json`,
-        fileMatch: [data.fileName],
-        schema: data.schema
-    }))
+  validate: true,
+  schemas: Object.entries(Games).map(([id, data]) => ({
+    uri: `https://meitinger.github.io/GameSolver/schemas/${id}.json`,
+    fileMatch: [data.fileName],
+    schema: data.schema
+  }))
 })
 
 render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    document.getElementById('app')
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('app')
 )

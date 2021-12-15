@@ -22,29 +22,29 @@ import uikit from 'uikit'
 
 const ajv = new Ajv()
 
-export async function prompt(message: string): Promise<string | null> {
-    try {
-        return await uikit.modal.prompt(message, '')
-    } catch {
-        return window.prompt(message)
-    }
+export async function prompt (message: string): Promise<string | null> {
+  try {
+    return await uikit.modal.prompt(message, '')
+  } catch {
+    return window.prompt(message)
+  }
 }
 
-export async function confirm(message: string): Promise<boolean> {
-    try {
-        await uikit.modal.confirm(message)
-        return true
-    } catch (error) {
-        return error ? window.confirm(message) : false
-    }
+export async function confirm (message: string): Promise<boolean> {
+  try {
+    await uikit.modal.confirm(message)
+    return true
+  } catch (error) {
+    return error == null ? window.confirm(message) : false
+  }
 }
 
-export async function alert(message: string): Promise<void> {
-    try {
-        await uikit.modal.alert(message)
-    } catch {
-        window.alert(message)
-    }
+export async function alert (message: string): Promise<void> {
+  try {
+    await uikit.modal.alert(message)
+  } catch {
+    window.alert(message)
+  }
 }
 
 export type JsonSerializable =
@@ -56,28 +56,28 @@ export type JsonSerializable =
     | { [key: string]: JsonSerializable }
 
 export type JsonSerializableType<T> = {
-    [P in keyof T]: T[P] & (JsonSerializable | JsonSerializableType<T[P]>)
+  [P in keyof T]: T[P] & (JsonSerializable | JsonSerializableType<T[P]>)
 }
 
-export function usePersistedState<S = JsonSerializable>(name: string, initialState: S, schema: JSONSchemaType<S>): [S, Dispatch<SetStateAction<S>>] {
-    return useReducer<Reducer<S, SetStateAction<S>>, S>(
-        (prevState: S, setState: SetStateAction<S>) => {
-            const state = setState instanceof Function ? setState(prevState) : setState
-            window.localStorage.setItem(name, JSON.stringify(state))
-            return state
-        },
-        initialState,
-        (initialState: S) => {
-            const persistedtate = window.localStorage.getItem(name)
-            if (persistedtate != null) {
-                try {
-                    const data: unknown = JSON.parse(persistedtate)
-                    if (ajv.validate(schema, data)) {
-                        return data
-                    }
-                } catch (reason) { console.error(reason) }
-            }
-            return initialState
-        }
-    )
+export function usePersistedState<S = JsonSerializable> (name: string, initialState: S, schema: JSONSchemaType<S>): [S, Dispatch<SetStateAction<S>>] {
+  return useReducer<Reducer<S, SetStateAction<S>>, S>(
+    (prevState: S, setState: SetStateAction<S>) => {
+      const state = setState instanceof Function ? setState(prevState) : setState
+      window.localStorage.setItem(name, JSON.stringify(state))
+      return state
+    },
+    initialState,
+    (initialState: S) => {
+      const persistedtate = window.localStorage.getItem(name)
+      if (persistedtate != null) {
+        try {
+          const data: unknown = JSON.parse(persistedtate)
+          if (ajv.validate(schema, data)) {
+            return data
+          }
+        } catch (reason) { console.error(reason) }
+      }
+      return initialState
+    }
+  )
 }
