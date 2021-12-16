@@ -1,7 +1,7 @@
 {
   "name": "game_solver",
   "version": "1.0.0",
-  "description": "Visual Solver for Decision Games",
+  "description": "Solver for decision games with state visualization and customizable game setup.",
   "homepage": "https://meitinger.github.io/GameSolver/",
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
@@ -25,9 +25,9 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
-    "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-config-standard-jsx": "^10.0.0",
     "eslint-config-standard-react": "^11.0.1",
+    "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
@@ -38,8 +38,8 @@
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "start": "parcel",
     "build": "parcel build --public-url /GameSolver/",
+    "start": "parcel",
     "test": "eslint ./src --ext .ts,.tsx"
   }
 }

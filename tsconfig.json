@@ -6,8 +6,8 @@
     "jsx": "react-native",
     "lib": [
       "DOM",
-      "WebWorker",
-      "ESNext"
+      "ESNext",
+      "WebWorker"
     ],
     "module": "ESNext",
     "moduleResolution": "Node",
