@@ -30,7 +30,7 @@ import './patch.css'
 uikit.use(Icons)
 
 self.MonacoEnvironment = {
-  getWorkerUrl: () => new URL('./../node_modules/monaco-editor/esm/vs/language/json/json.worker.js', import.meta.url)
+  getWorker: () => new Worker(new URL('./../node_modules/monaco-editor/esm/vs/language/json/json.worker.js', import.meta.url), { type: 'module' })
 }
 
 monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
