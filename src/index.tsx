@@ -29,7 +29,7 @@ import './patch.css'
 
 uikit.use(Icons)
 
-MonacoEnvironment = {
+self.MonacoEnvironment = {
   getWorker: () => new Worker(new URL('./../node_modules/monaco-editor/esm/vs/language/json/json.worker.js', import.meta.url), { type: 'module' })
 }
 
